@@ -35,8 +35,8 @@ const Register = () => {
   return (
     <div>
       <form action="">
-        <input onBlur={handleInput} type="email" name="email" id="email" placeholder="Your Email" />
-        <input onBlur={handleInput} type="password" name="password" id="password" placeholder="Your Password" />
+        <input onBlur={handleInput} type="email" name="email" id="email" required placeholder="Your Email" />
+        <input onBlur={handleInput} type="password" name="password" id="password" required placeholder="Your Password" />
         <button type="submit" onClick={handleCreateUser}>Sign Up</button>
       </form>
       {
