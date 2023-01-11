@@ -12,6 +12,7 @@ const RegisterReactBootstrap = () => {
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [warningPassword, setWarningPassword] = useState(false)
 
     let handleInput = (e) => {
         let event = e.target
@@ -21,6 +22,24 @@ const RegisterReactBootstrap = () => {
 
     let handleSignUp = (e) => {
         e.preventDefault()
+        setWarningPassword(false)
+        if (password?.length < 8 || password?.length > 16) {
+            setWarningPassword('Password Should be Minimum 8 Charcter & maximum 16 Length')
+            return
+        }
+        if (!/(?=.*[a-z])(?=.*[A-Z])/.test(password)) {
+            setWarningPassword('Password Should Contain Uppercase and Lowercase')
+            return
+        }
+        if (!/(?=.*\d)/.test(password)) {
+            setWarningPassword('Password Should Contain Atleast 1 Digit')
+            return
+        }
+        if (!/(?=.*?[#?!@$%^&*-])/.test(password)) {
+            setWarningPassword('Password Should Contain Special Symbol like !/@/$')
+            return
+        }
+        setWarningPassword(false)
         setSuccess(false)
         setError(false)
         setLoading(true)
@@ -39,17 +58,20 @@ const RegisterReactBootstrap = () => {
             <Form className='w-50 mx-auto' onSubmit={handleSignUp}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onBlur={handleInput} required />
+                    <Form.Control type="email" name='email' placeholder="Enter email" onBlur={handleInput} required />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onBlur={handleInput} required />
+                    <Form.Control type="password" name='password' placeholder="Password" onBlur={handleInput} required />
                 </Form.Group>
                 <Button variant="primary" type="submit" disabled={loading ? true : false}>
                     Submit
                 </Button>
             </Form>
+            {
+                warningPassword && <p className='text-center text-danger fw-bold'>{warningPassword}</p>
+            }
             {
                 loading && <div className='text-center'>
                     <div className="spinner-border" style={{ width: '3rem', height: '3rem' }} role="status">
