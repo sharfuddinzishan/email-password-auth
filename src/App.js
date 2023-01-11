@@ -1,6 +1,7 @@
 import React from 'react';
 import Register from './component/Register';
 import RegisterBootstrap from './component/RegisterBootstrap';
+import RegisterReactBootstrap from './component/RegisterReactBootstrap';
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
       <Register></Register>
       <RegisterBootstrap></RegisterBootstrap>
+      <RegisterReactBootstrap></RegisterReactBootstrap>
     </>
   );
 }
