@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import app from '../firebase/firebase.init';
 import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const auth = getAuth(app)
 
@@ -55,6 +56,7 @@ const RegisterReactBootstrap = () => {
     }
     return (
         <>
+            <h1>Registration Panel</h1>
             <Form className='w-50 mx-auto' onSubmit={handleSignUp}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -68,7 +70,9 @@ const RegisterReactBootstrap = () => {
                 <Button variant="primary" type="submit" disabled={loading ? true : false}>
                     Submit
                 </Button>
+                <Link className='ms-3 text-decoration-none' to='/login'>Have Account?</Link>
             </Form>
+
             {
                 warningPassword && <p className='text-center text-danger fw-bold'>{warningPassword}</p>
             }
