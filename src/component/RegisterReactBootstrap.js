@@ -23,6 +23,8 @@ const RegisterReactBootstrap = () => {
     let handleSignUp = (e) => {
         e.preventDefault()
         setWarningPassword(false)
+        setSuccess(false)
+        setError(false)
         if (password?.length < 8 || password?.length > 16) {
             setWarningPassword('Password Should be Minimum 8 Charcter & maximum 16 Length')
             return
@@ -39,17 +41,15 @@ const RegisterReactBootstrap = () => {
             setWarningPassword('Password Should Contain Special Symbol like !/@/$')
             return
         }
-        setWarningPassword(false)
-        setSuccess(false)
-        setError(false)
         setLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 setUser(result.user)
                 setSuccess(true)
+                e.target.reset()
             })
             .catch(e => {
-                setError(true)
+                setError(e.message)
             })
             .finally(() => setLoading(false))
     }
@@ -83,10 +83,10 @@ const RegisterReactBootstrap = () => {
                 </div>
             }
             {
-                success && <p className='text-center fs-2 text-success'>User <span className='text-info fw-bold'>{user?.email}</span> Created Successfully</p>
+                success && <p className='text-center text-sm text-success'>User <span className='text-info fw-bold'>{user?.email}</span> Created Successfully</p>
             }
             {
-                error && <p className='text-center fs-2 fw-bold text-warning'>User Not Created !</p>
+                error && <p className='text-center text-sm fw-bold text-warning'>User Not Created! <span className='text-danger'>{error}</span></p>
             }
         </>
     );
