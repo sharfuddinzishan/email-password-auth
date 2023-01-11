@@ -38,11 +38,11 @@ const RegisterBootstrap = () => {
             <form className='w-50 mx-auto' onSubmit={handleSignUp}>
                 <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
-                    <input type="email" name="email" className="form-control" id="exampleInputEmail1" onBlur={handleInput} />
+                    <input type="email" name="email" className="form-control" id="exampleInputEmail1" onBlur={handleInput} required />
                 </div>
                 <div className="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" name="password" className="form-control" id="exampleInputPassword1" onBlur={handleInput} />
+                    <input type="password" name="password" className="form-control" id="exampleInputPassword1" onBlur={handleInput} required />
                 </div>
                 <button type="submit" className="btn btn-primary" disabled={loading ? true : false}>Submit</button>
             </form>
